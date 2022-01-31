@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
  */
 router.get("/:symbol", async (req, res) => {
     const defaultRoute = "https://query2.finance.yahoo.com/v10/finance/quoteSummary/";
-    const modules = "?modules=assetProfile%2CsummaryProfile%2CsummaryDetail%2CesgScores%2Cprice%2CincomeStatementHistory%2CincomeStatementHistoryQuarterly%2CbalanceSheetHistory%2CbalanceSheetHistoryQuarterly%2CcashflowStatementHistory%2CcashflowStatementHistoryQuarterly%2CdefaultKeyStatistics%2CfinancialData%2CcalendarEvents%2CsecFilings%2CrecommendationTrend%2CupgradeDowngradeHistory%2CinstitutionOwnership%2CfundOwnership%2CmajorDirectHolders%2CmajorHoldersBreakdown%2CinsiderTransactions%2CinsiderHolders%2CnetSharePurchaseActivity%2Cearnings%2CearningsHistory%2CearningsTrend%2CindustryTrend%2CindexTrend%2CsectorTrend";
+    const modules = "?modules=assetProfile%2CsummaryProfile%2CsummaryDetail%2CesgScores%2Cprice%2CincomeStatementHistory%2CbalanceSheetHistory%2CbalanceSheetHistoryQuarterly%2CcashflowStatementHistory%2CdefaultKeyStatistics%2CfinancialData%2CcalendarEvents%2CsecFilings%2CrecommendationTrend%2CupgradeDowngradeHistory%2CinstitutionOwnership%2CfundOwnership%2CmajorDirectHolders%2CmajorHoldersBreakdown%2CinsiderHolders%2CnetSharePurchaseActivity%2Cearnings%2CearningsHistory%2CearningsTrend%2CindustryTrend%2CindexTrend%2CsectorTrend";
     const url = defaultRoute + req.params.symbol.toUpperCase() + modules;
 
     axios.get(url)
@@ -131,10 +131,6 @@ router.get("/:symbol", async (req, res) => {
                         "forwardPE": {
                             "raw": response.data.quoteSummary.result[0].defaultKeyStatistics.forwardPE.raw,
                             "fmt": response.data.quoteSummary.result[0].defaultKeyStatistics.forwardPE.fmt
-                        },
-                        "profitMargins": {
-                            "raw": response.data.quoteSummary.result[0].defaultKeyStatistics.profitMargins.raw,
-                            "fmt": response.data.quoteSummary.result[0].defaultKeyStatistics.profitMargins.fmt
                         },
                         "floatShares": {
                             "raw": response.data.quoteSummary.result[0].defaultKeyStatistics.floatShares.raw,
@@ -279,9 +275,58 @@ router.get("/:symbol", async (req, res) => {
                             "raw": response.data.quoteSummary.result[0].summaryDetail.trailingAnnualDividendYield.raw,
                             "fmt": response.data.quoteSummary.result[0].summaryDetail.trailingAnnualDividendYield.fmt
                         },
-
-
-
+                        "totalCash": {
+                            "raw": response.data.quoteSummary.result[0].financialData.totalCash.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.totalCash.fmt
+                        },"totalCashPerShare": {
+                            "raw": response.data.quoteSummary.result[0].financialData.totalCashPerShare.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.totalCashPerShare.fmt
+                        },"ebitda": {
+                            "raw": response.data.quoteSummary.result[0].financialData.ebitda.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.ebitda.fmt
+                        },"totalDebt": {
+                            "raw": response.data.quoteSummary.result[0].financialData.totalDebt.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.totalDebt.fmt
+                        },"debtToEquity": {
+                            "raw": response.data.quoteSummary.result[0].financialData.debtToEquity.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.debtToEquity.fmt
+                        },"revenuePerShare": {
+                            "raw": response.data.quoteSummary.result[0].financialData.revenuePerShare.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.revenuePerShare.fmt
+                        },"returnOnAssets": {
+                            "raw": response.data.quoteSummary.result[0].financialData.returnOnAssets.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.returnOnAssets.fmt
+                        },"returnOnEquity": {
+                            "raw": response.data.quoteSummary.result[0].financialData.returnOnEquity.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.returnOnEquity.fmt
+                        },"grossProfits": {
+                            "raw": response.data.quoteSummary.result[0].financialData.grossProfits.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.grossProfits.fmt
+                        },"freeCashflow": {
+                            "raw": response.data.quoteSummary.result[0].financialData.freeCashflow.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.freeCashflow.fmt
+                        },"operatingCashflow": {
+                            "raw": response.data.quoteSummary.result[0].financialData.operatingCashflow.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.operatingCashflow.fmt
+                        },"earningsGrowth": {
+                            "raw": response.data.quoteSummary.result[0].financialData.earningsGrowth.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.earningsGrowth.fmt
+                        },"revenueGrowth": {
+                            "raw": response.data.quoteSummary.result[0].financialData.revenueGrowth.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.revenueGrowth.fmt
+                        },"grossMargins": {
+                            "raw": response.data.quoteSummary.result[0].financialData.grossMargins.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.grossMargins.fmt
+                        },"ebitdaMargins": {
+                            "raw": response.data.quoteSummary.result[0].financialData.ebitdaMargins.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.ebitdaMargins.fmt
+                        },"operatingMargins": {
+                            "raw": response.data.quoteSummary.result[0].financialData.operatingMargins.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.operatingMargins.fmt
+                        },"profitMargins": {
+                            "raw": response.data.quoteSummary.result[0].financialData.profitMargins.raw,
+                            "fmt": response.data.quoteSummary.result[0].financialData.profitMargins.fmt
+                        }
                     },
 
                     "balanceSheet": {
@@ -361,7 +406,25 @@ router.get("/:symbol", async (req, res) => {
                     },
 
                     "esg": {
-
+                        "year": response.data.quoteSummary.result[0].esgScores.ratingYear,
+                        "peerGroup": response.data.quoteSummary.result[0].esgScores.peerGroup,
+                        "peerEsgScorePerformance": response.data.quoteSummary.result[0].esgScores.peerEsgScorePerformance,
+                        "total": {
+                            "raw": response.data.quoteSummary.result[0].esgScores.totalEsg.raw,
+                            "fmt": response.data.quoteSummary.result[0].esgScores.totalEsg.fmt,
+                        },
+                        "environment": {
+                            "raw": response.data.quoteSummary.result[0].esgScores.environmentScore.raw,
+                            "fmt": response.data.quoteSummary.result[0].esgScores.environmentScore.fmt,
+                        },
+                        "social": {
+                            "raw": response.data.quoteSummary.result[0].esgScores.socialScore.raw,
+                            "fmt": response.data.quoteSummary.result[0].esgScores.socialScore.fmt,
+                        },
+                        "governance": {
+                            "raw": response.data.quoteSummary.result[0].esgScores.governanceScore.raw,
+                            "fmt": response.data.quoteSummary.result[0].esgScores.governanceScore.fmt,
+                        }
                     }
                 }
             });
