@@ -467,8 +467,8 @@ router.get("/:symbol", async (req, res) => {
                             responseData.profile.sector = response.data.quoteSummary.result[0].assetProfile.sector;
                         }
 
-                        if (response.data.quoteSummary.result[0].assetProfile.hasOwnProperty("businessSummary")) {
-                            responseData.profile.businessSummary = response.data.quoteSummary.result[0].assetProfile.businessSummary;
+                        if (response.data.quoteSummary.result[0].assetProfile.hasOwnProperty("longBusinessSummary")) {
+                            responseData.profile.businessSummary = response.data.quoteSummary.result[0].assetProfile.longBusinessSummary;
                         }
 
                         if (response.data.quoteSummary.result[0].assetProfile.hasOwnProperty("fullTimeEmployees")) {
@@ -1442,21 +1442,61 @@ router.get("/:symbol", async (req, res) => {
 router.get("/:symbol/chart", async (req, res) => {
     const defaultRoute = "https://query1.finance.yahoo.com/v8/finance/chart/";
     const url = defaultRoute + req.params.symbol.toUpperCase();
-    // @todo check if response exists
+    let responseData = {
+        "symbol": null,
+        "timestamps": null,
+        "quotes": {
+            "volume": null,
+            "open": null,
+            "close": null,
+            "high": null,
+            "low": null
+        }
+    };
+
     axios.get(url)
         .then(response => {
-            res.status(200).json({
-                "error": false, "status": 200, "response": {
-                    "symbol": response.data.chart.result[0].meta.symbol,
-                    "timestamps": response.data.chart.result[0].timestamp,
-                    "quotes": {
-                        "volume": response.data.chart.result[0].indicators.quote[0].volume,
-                        "open": response.data.chart.result[0].indicators.quote[0].open,
-                        "close": response.data.chart.result[0].indicators.quote[0].close,
-                        "high": response.data.chart.result[0].indicators.quote[0].high,
-                        "low": response.data.chart.result[0].indicators.quote[0].low
+            if (response.data.hasOwnProperty("chart")) {
+
+                if (response.data.chart.hasOwnProperty("result")) {
+                    if (response.data.chart.result[0].hasOwnProperty("meta")) {
+                        if (response.data.chart.result[0].meta.hasOwnProperty("symbol")) {
+                            responseData.symbol = response.data.chart.result[0].meta.symbol;
+                        }
+                    }
+
+                    if (response.data.chart.result[0].hasOwnProperty("timestamp")) {
+                        responseData.timestamps = response.data.chart.result[0].timestamp;
+                    }
+
+                    if (response.data.chart.result[0].hasOwnProperty("indicators")) {
+                        if (response.data.chart.result[0].indicators.hasOwnProperty("quote")) {
+                            if (response.data.chart.result[0].indicators.quote[0].hasOwnProperty("volume")) {
+                                responseData.quotes.volume = response.data.chart.result[0].indicators.quote[0].volume;
+                            }
+
+                            if (response.data.chart.result[0].indicators.quote[0].hasOwnProperty("open")) {
+                                responseData.quotes.open = response.data.chart.result[0].indicators.quote[0].open;
+                            }
+
+                            if (response.data.chart.result[0].indicators.quote[0].hasOwnProperty("close")) {
+                                responseData.quotes.close = response.data.chart.result[0].indicators.quote[0].close;
+                            }
+
+                            if (response.data.chart.result[0].indicators.quote[0].hasOwnProperty("high")) {
+                                responseData.quotes.high = response.data.chart.result[0].indicators.quote[0].high;
+                            }
+
+                            if (response.data.chart.result[0].indicators.quote[0].hasOwnProperty("low")) {
+                                responseData.quotes.low = response.data.chart.result[0].indicators.quote[0].low;
+                            }
+                        }
                     }
                 }
+            }
+
+            res.status(200).json({
+                "error": false, "status": 200, "response": responseData
             });
         })
         .catch(error => {
