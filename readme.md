@@ -9,4 +9,4 @@
 - [ ] Validate requests
 - [ ] Limit requests
 - [ ] Cache requests
-- [ ] Check, if object exists
+- [X] Check, if object exists
