@@ -6,9 +6,11 @@ const stockRouter = require("./routes/stocks");
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
-// Routes
+/**
+ * Routes
+ */
 app.use("/", indexRouter);
 app.use("/stocks", stockRouter);
 
