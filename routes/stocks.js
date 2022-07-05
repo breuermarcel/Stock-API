@@ -1439,6 +1439,30 @@ router.get("/:symbol", async (req, res) => {
         });
 });
 
+router.get("/:symbol/profile", async (req, res) => {
+
+});
+
+router.get("/:symbol/recommendations", async(req, res) => {
+
+});
+
+router.get("/:symbol/cashflow", async(req, res) => {
+
+});
+
+router.get("/:symbol/income", async(req, res) => {
+
+});
+
+router.get("/:symbol/earnings", async(req, res) => {
+
+});
+
+router.get("/:symbol/balancesheet", async(req, res) => {
+
+});
+
 router.get("/:symbol/chart", async (req, res) => {
     const defaultRoute = "https://query1.finance.yahoo.com/v8/finance/chart/";
     const url = defaultRoute + req.params.symbol.toUpperCase();
