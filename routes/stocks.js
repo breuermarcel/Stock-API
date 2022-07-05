@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 
     if (Object.keys(req.query).length === 0) {
         res.status(404).json({
-            "error": true, "status": 404
+            "error": true
         });
     }
 
@@ -30,14 +30,14 @@ router.get("/", async (req, res) => {
             }
 
             res.status(200).json({
-                "error": false, "status": 200, "response": {
+                "error": false, "response": {
                     "count": response.data.quotes.length, "stocks": stocks
                 }
             });
         })
         .catch(error => {
             res.status(503).json({
-                "error": true, "status": 503
+                "error": true,
             });
         });
 });
@@ -345,46 +345,46 @@ router.get("/:symbol", async (req, res) => {
             }, "otherAssets": {
                 "raw": null,
                 "fmt": null
-            },"totalAssets": {
+            }, "totalAssets": {
                 "raw": null,
                 "fmt": null
-            },"shortLongTermDebt": {
+            }, "shortLongTermDebt": {
                 "raw": null,
                 "fmt": null
-            },"accountsPayable": {
+            }, "accountsPayable": {
                 "raw": null,
                 "fmt": null
-            },"otherCurrentLiab": {
+            }, "otherCurrentLiab": {
                 "raw": null,
                 "fmt": null
-            },"longTermDebt": {
+            }, "longTermDebt": {
                 "raw": null,
                 "fmt": null
-            },"otherLiab": {
+            }, "otherLiab": {
                 "raw": null,
                 "fmt": null
-            },"totalCurrentLiabilities": {
+            }, "totalCurrentLiabilities": {
                 "raw": null,
                 "fmt": null
-            },"totalLiab": {
+            }, "totalLiab": {
                 "raw": null,
                 "fmt": null
-            },"commonStock": {
+            }, "commonStock": {
                 "raw": null,
                 "fmt": null
-            },"retainedEarnings": {
+            }, "retainedEarnings": {
                 "raw": null,
                 "fmt": null
-            },"treasuryStock": {
+            }, "treasuryStock": {
                 "raw": null,
                 "fmt": null
-            },"otherStockholderEquity": {
+            }, "otherStockholderEquity": {
                 "raw": null,
                 "fmt": null
-            },"totalStockholderEquity": {
+            }, "totalStockholderEquity": {
                 "raw": null,
                 "fmt": null
-            },"netTangibleAssets": {
+            }, "netTangibleAssets": {
                 "raw": null,
                 "fmt": null
             }
@@ -395,13 +395,13 @@ router.get("/:symbol", async (req, res) => {
             "total": {
                 "raw": null,
                 "fmt": null
-            },"environment": {
+            }, "environment": {
                 "raw": null,
                 "fmt": null
-            },"social": {
+            }, "social": {
                 "raw": null,
                 "fmt": null
-            },"governance": {
+            }, "governance": {
                 "raw": null,
                 "fmt": null
             }
@@ -1429,12 +1429,12 @@ router.get("/:symbol", async (req, res) => {
             }
 
             res.status(200).json({
-                "error": false, "status": 200, "response": responseData
+                "error": false, "response": responseData
             });
         })
         .catch(error => {
             res.status(404).json({
-                "error": true, "status": 404
+                "error": true,
             });
         });
 });
@@ -1496,12 +1496,12 @@ router.get("/:symbol/chart", async (req, res) => {
             }
 
             res.status(200).json({
-                "error": false, "status": 200, "response": responseData
+                "error": false, "response": responseData
             });
         })
         .catch(error => {
             res.status(404).json({
-                "error": true, "status": 404
+                "error": true,
             });
         });
 });

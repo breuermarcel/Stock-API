@@ -3,7 +3,8 @@ const router = express.Router();
 
 router.get("/", function (req, res, next) {
     res.status(200).json({
-        "error": false, "status": 200, "response": {
+        "error": false,
+        "response": {
             "version": "1.0", "licence": "MIT", "routes": {
                 "stocks": {
                     "name": "Stocks", "description": "", "route": "/stocks/", "additionalParams": {
